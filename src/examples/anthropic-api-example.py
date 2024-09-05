@@ -1,3 +1,6 @@
+# Inspired from official anthropic-claude example 
+# For usage/stats check: https://console.anthropic.com/settings/usage 
+
 import os
 from dotenv import load_dotenv
 from anthropic import Anthropic

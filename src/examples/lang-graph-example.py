@@ -1,5 +1,6 @@
-from typing import Annotated
+# Inspired from https://langchain-ai.github.io/langgraph/tutorials/introduction/#part-1-build-a-basic-chatbot
 
+from typing import Annotated
 from langchain_anthropic import ChatAnthropic
 from typing_extensions import TypedDict
 from dotenv import load_dotenv
