@@ -13,7 +13,7 @@ class Laplacian:
         """
         Construct the Laplacian matrix for the graph.
         
-        :return: A dictionary where each key is a vertex, and the value is a dictionary representing the row of the Laplacian matrix.
+        :return laplacian: A dictionary where each key is a vertex, and the value is a dictionary representing the row of the Laplacian matrix.
         """
         laplacian = defaultdict(lambda: defaultdict(int))
         for v in self.graph:
@@ -29,7 +29,7 @@ class Laplacian:
         
         :param divisor: Initial divisor dictionary representing wealth at each vertex.
         :param firing_script: The firing script dictionary where keys are vertices and values are the number of times they fired.
-        :return: A dictionary representing the resulting divisor after applying the Laplacian.
+        :return resulting_divisor: A dictionary representing the resulting divisor after applying the Laplacian.
         """
         laplacian = self.construct_matrix()
         resulting_divisor = defaultdict(int, divisor)
