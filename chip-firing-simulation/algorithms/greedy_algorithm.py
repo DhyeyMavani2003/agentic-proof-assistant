@@ -9,9 +9,9 @@ class GreedyAlgorithm:
         :param divisor: A dictionary representing the wealth at each vertex.
         """
         self.graph = graph
-        self.divisor = divisor
+        self.divisor = divisor.copy()  # Make a copy to avoid modifying original
         self.marked_vertices = set()
-        self.firing_script = defaultdict(int)
+        self.firing_script = {v: 0 for v in graph} # Initialize firing script with all vertices
 
     def is_effective(self):
         """
@@ -27,11 +27,14 @@ class GreedyAlgorithm:
         
         :param vertex: The vertex at which to perform the borrowing move.
         """
+        # Decrement the borrowing vertex's firing script since it's receiving
+        self.firing_script[vertex] -= 1
+        
+        # Update wealth based on the borrowing move
         for neighbor, edge_count in self.graph[vertex].items():
             total_borrowed = edge_count
             self.divisor[neighbor] -= total_borrowed
             self.divisor[vertex] += total_borrowed
-        self.firing_script[vertex] += 1
 
     def play(self):
         """
@@ -39,16 +42,18 @@ class GreedyAlgorithm:
         
         :return: Tuple (True, firing_script) if the game is winnable; otherwise (False, None).
         """
+        moves = 0
+        max_moves = len(self.graph) * 10  # Reasonable upper bound
+        
         while not self.is_effective():
+            moves += 1
+            if moves > max_moves:
+                return False, None
+                
             in_debt_vertex = next((v for v in self.divisor if self.divisor[v] < 0), None)
             if in_debt_vertex is None:
-                return True, self.firing_script
-
+                break
+                
             self.borrowing_move(in_debt_vertex)
             
-            if in_debt_vertex not in self.marked_vertices:
-                self.marked_vertices.add(in_debt_vertex)
-            else:
-                if self.marked_vertices == set(self.graph.keys()):
-                    return False, None
-        return True, self.firing_script
+        return True, dict(self.firing_script)
