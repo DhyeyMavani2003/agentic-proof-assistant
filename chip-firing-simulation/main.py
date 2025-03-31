@@ -8,11 +8,10 @@ def main():
         'E': {'A': 2, 'C': 1}
     }
     divisor = {'A': 2, 'B': -3, 'C': 4, 'E': -1}
-    q = 'A'  # Distinguished vertex for Dhar's algorithm
 
     # Create a DollarGame instance
     game = DollarGame(graph, divisor)
-
+    
     # Play with the greedy algorithm
     winnable, result = game.play_game(strategy="greedy")
     if winnable:
@@ -24,6 +23,13 @@ def main():
         print("Resulting Divisor:", dict(resulting_divisor))
     else:
         print("The game is not winnable with the greedy algorithm.")
+
+    # Example of using Dhar's algorithm (consistent with example in write-up)
+    divisor = {'A': 3, 'B': -2, 'C': 1, 'E': 0}
+    q = 'B'  # Distinguished vertex for Dhar's algorithm
+
+    # Create a DollarGame instance
+    game = DollarGame(graph, divisor)
 
     # Play with Dhar's algorithm
     winnable, result = game.play_game(strategy="dhar", q=q)

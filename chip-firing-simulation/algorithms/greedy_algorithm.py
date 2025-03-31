@@ -1,5 +1,3 @@
-from collections import defaultdict
-
 class GreedyAlgorithm:
     def __init__(self, graph, divisor):
         """
