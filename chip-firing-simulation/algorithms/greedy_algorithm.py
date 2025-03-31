@@ -41,7 +41,7 @@ class GreedyAlgorithm:
         :return: Tuple (True, firing_script) if the game is winnable; otherwise (False, None).
         """
         moves = 0
-        max_moves = len(self.graph) * 10  # Reasonable upper bound
+        max_moves = len(self.graph) * 10  # Enforcing a Scalable and Reasonable upper bound
         
         while not self.is_effective():
             moves += 1

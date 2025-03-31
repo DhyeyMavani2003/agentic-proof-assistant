@@ -82,7 +82,6 @@ class DharAlgorithm:
         
         # Initialize burnt set with the distinguished vertex q
         burnt = {self.q}
-        # All other vertices start as unburnt
         unburnt = set(self.graph.keys()) - burnt
         
         # Continue until no new vertices burn
@@ -99,11 +98,6 @@ class DharAlgorithm:
                 
                 # A vertex burns if it has fewer chips than edges to burnt vertices
                 if v in self.configuration and self.configuration[v] < edges_to_burnt:
-                    burnt.add(v)
-                    unburnt.remove(v)
-                    changed = True
-                # Handle the case where v might not be in configuration (could be q)
-                elif v not in self.configuration and v != self.q:
                     burnt.add(v)
                     unburnt.remove(v)
                     changed = True
